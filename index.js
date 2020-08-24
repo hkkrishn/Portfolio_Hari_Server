@@ -10,6 +10,13 @@ const server = express();
 server.get('/test',(req,res)=>{
     return res.json({message:"test is working"})
 })
+
+//import portfolio routes
+const portfolioRoutes = require('./routes/portfolios')
+
+
+//employ route using a basepath
+server.use('/api/v1/portfolios',portfolioRoutes)
 const PORT = parseInt(process.env.PORT) || 3001;
 server.listen(PORT,(err)=>{
     if(err){
