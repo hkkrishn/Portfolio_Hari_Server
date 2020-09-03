@@ -1,0 +1,25 @@
+//Author:Harikrishnan Kuppusamykrishnan
+//Project: Portfolio Website Server
+//Date: 08/06/2020
+//Description: Database Schema and MongoDB information and Notes
+
+
+What is a Collection?
+->A Collection is a structure that keeps all your data in one place, e.g portfolio Collection
+you have multiple documents or data
+
+-->The collection name has to be the plural version of what you registered you model as e.g Portfolio --> Portfolios
+
+Overall Wireframe
+
+MongoDB Atlas Database
+---> Portfolio Collection
+            --->Portfolio Document 1
+            --->Portfolio Document 2
+            --->Portfolio Document 3
+---> User Collection
+            --->User Document 1
+            --->User Document 2
+            --->User Document 3
+
+

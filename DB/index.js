@@ -4,6 +4,8 @@
 //Description: Extracted MongoDB connection logic
 const config = require('../config/dev')
 const mongoose = require('mongoose');
+//Model and Schema importz
+require('./models/portfolio')
 
 
 //Mongoose is a MongoDB object modeling tool designed to work in an
