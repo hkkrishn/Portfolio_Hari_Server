@@ -13,29 +13,17 @@ const config = require('./config/dev')
 server.get('/test',(req,res)=>{
     return res.json({message:"test is working"})
 })
-
+const {connect} = require('./DB')
+//run the exported connection function
+//connect is a promise
 //import portfolio routes
 const portfolioRoutes = require('./routes/portfolios')
 
-//Mongoose is a MongoDB object modeling tool designed to work in an
-//asynchronous environment. Mongoose supports both promises and callbacks.
-//import mongoose to link node server to MongoDB
+//async function that starts the server by awaiting the response from the mongoDB connect function
+const runServer = async()=>{
+    await connect();
 
-const mongoose = require('mongoose');
-//connection string gathered from mongoDB
-mongoose.connect(config.DB_URI,{
-    useNewUrlParser:true,
-    useUnifiedTopology:true,
-    useCreateIndex:true,
-},(err)=>{
-    if(err){
-        console.log(err)
-    }else{
-        console.log('Database successfully connected')
-    }
-})
-
-//employ route using a basepath
+    //employ route using a basepath run the server
 server.use('/api/v1/portfolios',portfolioRoutes)
 const PORT = parseInt(process.env.PORT) || 3001;
 server.listen(PORT,(err)=>{
@@ -45,4 +33,13 @@ server.listen(PORT,(err)=>{
         console.log('Server initialized on PORT' + ' '+ PORT)
     }
 })
+
+}
+runServer();
+
+
+
+
+
+
 
