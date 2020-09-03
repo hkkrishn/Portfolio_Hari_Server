@@ -5,10 +5,12 @@
 
 const express =require('express');
 //import function getPortfolios
-const {getPortfolios} = require('../controllers/portfolios.js')
+const {getPortfolios,getPortfolioById} = require('../controllers/portfolios.js')
 const router = express.Router();
 //express function to handle routes
 //Get Enpoint
 router.get('/',getPortfolios)
+//endpoint to get portfolio by id
+router.get('/:id',getPortfolioById)
 //Initialize server and export.
 module.exports = router;
