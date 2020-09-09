@@ -7,6 +7,8 @@ const express = require('express');
 
 
 //initialize server
+//grab data from body of request
+const bodyParser = require('body-parser')
 const server = express();
 const config = require('./config/dev')
 //initialize entry point to the server
@@ -21,7 +23,9 @@ const portfolioRoutes = require('./routes/portfolios')
 
 //async function that starts the server by awaiting the response from the mongoDB connect function
 const runServer = async()=>{
-    await connect();
+    await require('./DB').connect();
+
+    server.use(bodyParser.json());
 
     //employ route using a basepath run the server
 server.use('/api/v1/portfolios',portfolioRoutes)
