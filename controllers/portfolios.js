@@ -35,9 +35,28 @@ exports.getPortfolioById = async (req,res)=>{
     }
 
 }
+//Author:Harikrishnan Kuppusamykrishnan
+//Project: Portfolio Website Server
+//Date: 08/06/2020
+//Description: Controller that allows for the creation of New projects
 
+//error handling is done via try/catch statement
 exports.createPortfolio = async (req,res)=>{
-    const data = req.body;
-    console.log(req.body)
-    return res.json({message:"Creating Project..."})
+    const projectData = req.body;
+    //User Id for admin from Auth0
+    const userId = "auth0|5f57fe31aa32d70069e86125"
+    console.log(projectData)
+    //create instance of model
+    const portfolio =  new Portfolio(projectData)
+    portfolio.userId = userId
+    try{
+
+        const newProject = await portfolio.save();
+        //send back created portfolio
+        return res.json(newProject);
+
+    }catch(err){
+        return res.status(422).send(err.message)
+    }
+
 }

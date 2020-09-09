@@ -25,7 +25,7 @@ const portfolioRoutes = require('./routes/portfolios')
 const runServer = async()=>{
     await require('./DB').connect();
 
-    server.use(bodyParser.json());
+    server.use(bodyParser.json())
 
     //employ route using a basepath run the server
 server.use('/api/v1/portfolios',portfolioRoutes)
