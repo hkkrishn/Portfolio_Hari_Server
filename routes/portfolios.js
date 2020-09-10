@@ -7,13 +7,14 @@ const express =require('express');
 //import function getPortfolios
 const {getPortfolios,getPortfolioById,createPortfolio} = require('../controllers/portfolios.js')
 const router = express.Router();
+const { checkJwt } = require('../controllers/auth');
 //express function to handle routes
 //Get Enpoint
-router.get('/',getPortfolios)
+router.get('',getPortfolios)
 //endpoint to get portfolio by id
 router.get('/:id',getPortfolioById)
 //Initialize server and export.
 
 //create enpoint for new projects
-router.post('',createPortfolio)
+router.post('',checkJwt,createPortfolio)
 module.exports = router;
