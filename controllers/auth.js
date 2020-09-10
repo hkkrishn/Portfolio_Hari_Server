@@ -16,9 +16,9 @@ exports.checkJwt = jwt({
     cache: true,
     rateLimit: true,
     jwksRequestsPerMinute: 10,
-    jwksUri: 'https://dev-pxt8cafa.eu.auth0.com/.well-known/jwks.json'
+    jwksUri: 'https://dev-wec1sbcv.us.auth0.com/.well-known/jwks.json'
   }),
-  audience: 'https://dev-pxt8cafa.eu.auth0.com/api/v2/',
-  issuer: 'https://dev-pxt8cafa.eu.auth0.com/',
+  audience: 'https://dev-wec1sbcv.us.auth0.com/api/v2/',
+  issuer: 'https://dev-wec1sbcv.us.auth0.com/',
   algorithms: ['RS256']
 });
