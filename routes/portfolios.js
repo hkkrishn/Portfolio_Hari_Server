@@ -20,5 +20,5 @@ router.get('/:id',getPortfolioById)
 router.post('',checkJwt,createPortfolio)
 //TODO create middleware to check for admin rights
 //we need to extract portfolio id, in order to update portfolio
-router.patch('/:id',updatePortfolio)
+router.patch('/:id',checkJwt,updatePortfolio)
 module.exports = router;
