@@ -44,7 +44,9 @@ exports.getPortfolioById = async (req,res)=>{
 exports.createPortfolio = async (req,res)=>{
     const projectData = req.body;
     //User Id for admin from Auth0
-    const userId = "auth0|5f57fe31aa32d70069e86125"
+
+    //since we are chaining the checkJWT middleware this will provide the user id into the request obj
+    const userId = req.user.sub;//.sub is defined from auth0
     console.log(projectData)
     //create instance of model
     const portfolio =  new Portfolio(projectData)
@@ -60,3 +62,23 @@ exports.createPortfolio = async (req,res)=>{
     }
 
 }
+//Author:Harikrishnan Kuppusamykrishnan
+//Project: Portfolio Website Server
+//Date: 08/06/2020
+//Description: Controller that allows for the updating of project data server side
+
+//error handling is done via try/catch statement
+exports.updatePortfolio = async (req, res) => {
+
+    //we get the body we want to update, the params provides the id
+    const { body, params: {id}} = req;
+
+    try {
+        //the runValidotors will need to execute to confirm the update to the doc
+
+      const updatedPortfolio = await Portfolio.findOneAndUpdate({_id: id}, body, {new: true, runValidators: true})
+      return res.json(updatedPortfolio);
+    } catch(error) {
+      return res.status(422).send(error.message);
+    }
+  }

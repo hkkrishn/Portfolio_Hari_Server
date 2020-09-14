@@ -5,7 +5,8 @@
 
 const express =require('express');
 //import function getPortfolios
-const {getPortfolios,getPortfolioById,createPortfolio} = require('../controllers/portfolios.js')
+const {getPortfolios,getPortfolioById,createPortfolio,
+    updatePortfolio } = require('../controllers/portfolios');
 const router = express.Router();
 const { checkJwt } = require('../controllers/auth');
 //express function to handle routes
@@ -17,4 +18,7 @@ router.get('/:id',getPortfolioById)
 
 //create enpoint for new projects
 router.post('',checkJwt,createPortfolio)
+//TODO create middleware to check for admin rights
+//we need to extract portfolio id, in order to update portfolio
+router.patch('/:id',updatePortfolio)
 module.exports = router;
