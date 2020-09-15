@@ -6,6 +6,7 @@
 
 const jwt = require('express-jwt');
 const jwksRsa = require('jwks-rsa');
+const config = require('../config/dev');
 
 // Authentication middleware
 // This middleware will check access token in authorization headers
@@ -22,3 +23,20 @@ exports.checkJwt = jwt({
   issuer: 'https://dev-wec1sbcv.us.auth0.com/',
   algorithms: ['RS256']
 });
+
+//custom middleware
+//middleware that takes in a req and res object and a function
+//this middleware will receive the role of the user and checks if the user has a specific role
+
+
+exports.checkRole = role => (req, res, next) => {
+  //since this middleware comes after checkJWT we can expect this to have the user object
+  const user = req.user;
+  console.log(user)
+
+  if (user && user[config.AUTH0_NAMESPACE + '/roles'].includes(role)) {
+    next();
+  } else {
+    return res.status(401).send('You are not authorized to access this resource!')
+  }
+}
