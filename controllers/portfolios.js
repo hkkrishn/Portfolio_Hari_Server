@@ -82,3 +82,13 @@ exports.updatePortfolio = async (req, res) => {
       return res.status(422).send(error.message);
     }
   }
+
+  //Author:Harikrishnan Kuppusamykrishnan
+//Project: Portfolio Website Server
+//Date: 08/06/2020
+//Description: Controller that allows for the deletion of project server side
+
+exports.deletePortfolio = async (req, res) => {
+    const portfolio = await Portfolio.findOneAndRemove({_id: req.params.id});
+    return res.json({_id: portfolio.id})
+  }
